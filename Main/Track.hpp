@@ -64,6 +64,7 @@ public:
 	// Laser positions, as shown on the overlay
 	float laserPositions[2];
 	float laserPointerOpacity[2] = { 1.0f };
+    float laserWarningOpacity[2] = { 1.0f };
 
 	// Visible time elements on the playfield track
 	// a single unit is 1 beat in distance
@@ -86,6 +87,7 @@ public:
 	Material holdButtonMaterial;
 	Texture laserTexture;
 	Texture laserTailTextures[2]; // Entry and exit textures
+    Texture laserWarningTextures[2]; // left and right warning textures for lasers
 	Material laserMaterial;
 
 	/* Overlay graphics */

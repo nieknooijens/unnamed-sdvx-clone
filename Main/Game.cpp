@@ -367,6 +367,7 @@ public:
 		{
 			m_track->laserPositions[i] = m_scoring.laserPositions[i];
 			m_track->laserPointerOpacity[i] = (1.0f - Math::Clamp<float>(m_scoring.timeSinceLaserUsed[i] / 0.5f - 1.0f, 0, 1));
+            m_track->laserWarningOpacity[i] = (1.0f - Math::Clamp<float>(m_scoring.timeSinceLaserUsed[i] / 0.1f, 0, 1));
 		}
 
 		m_track->DrawOverlays(scoringRq);

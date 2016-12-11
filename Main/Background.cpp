@@ -61,7 +61,7 @@ class TestBackground : public FullscreenBackground
 		//if(tickTime > 0.7f)
 		//	timing.y += ((tickTime - 0.7f) / 0.3f) * 0.8f; // Gradual build up again
 
-		Vector3 trackEndWorld = Vector3(0.0f, 25.0f, 0.0f);
+        Vector3 trackEndWorld = Vector3(0.0f, 25.0f, 0.0f);
 		Vector2i screenCenter = game->GetCamera().Project(trackEndWorld);
 		fullscreenMaterialParams.SetParameter("screenCenter", screenCenter);
 		fullscreenMaterialParams.SetParameter("timing", timing);

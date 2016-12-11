@@ -81,6 +81,11 @@ bool Track::AsyncLoad()
 	loader->AddTexture(laserTailTextures[0], "laser_entry.png");
 	loader->AddTexture(laserTailTextures[1], "laser_exit.png");
 
+    // Left and right warning textures for lasers
+    loader->AddTexture(laserWarningTextures[0], "laser_l.png");
+    loader->AddTexture(laserWarningTextures[1], "laser_r.png");
+
+
 	loader->AddTexture(comboSpriteSheet, "combo.png");
 
 	// Track materials
@@ -368,7 +373,7 @@ void Track::DrawObjectState(RenderQueue& rq, class BeatmapPlayback& playback, Ob
 		if(!laser->prev)
 		{
 			Mesh laserTail = m_laserTrackBuilder[laser->index]->GenerateTrackEntry(playback, laser);
-			DrawSegment(laserTail, laserTailTextures[0]);
+            DrawSegment(laserTail, laserTailTextures[0]); //0 is entry
 		}
 
 		// Body
@@ -379,7 +384,7 @@ void Track::DrawObjectState(RenderQueue& rq, class BeatmapPlayback& playback, Ob
 		if(!laser->next)
 		{
 			Mesh laserTail = m_laserTrackBuilder[laser->index]->GenerateTrackExit(playback, laser);
-			DrawSegment(laserTail, laserTailTextures[1]);
+            DrawSegment(laserTail, laserTailTextures[1]); //1 is exit
 		}
 	}
 }
@@ -403,8 +408,12 @@ void Track::DrawOverlays(class RenderQueue& rq)
 		Vector2 objectSize = Vector2(buttonWidth * 0.7f, 0.0f);
 		objectSize.y = laserPointerTexture->CalculateHeight(objectSize.x);
 		DrawSprite(rq, Vector3(pos - trackWidth * 0.5f, 0.0f, 0.0f), objectSize, laserPointerTexture, laserColors[i].WithAlpha(laserPointerOpacity[i]));
+        DrawSprite(rq,Vector3(-trackWidth + trackWidth * i* 2.0f,0.1f,0.0f), objectSize * 3, laserWarningTextures[i],Color::White.WithAlpha(laserWarningOpacity[i]), 0.0f); //still need to find out tilt
 	}
+
+
 }
+
 void Track::DrawTrackOverlay(RenderQueue& rq, Texture texture, float heightOffset /*= 0.05f*/, float widthScale /*= 1.0f*/)
 {
 	MaterialParameterSet params;
